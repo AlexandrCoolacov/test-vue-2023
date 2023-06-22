@@ -40,7 +40,7 @@ export default {
     this.changedContainerInfo = [...this.containerInfo]
     console.log(this.changedContainerInfo.shift())
     console.log(this.changedContainerInfo)
-    console.log(this.containerInfo)
+    // console.log(this.containerInfo)
   },
   data () {
     return {
