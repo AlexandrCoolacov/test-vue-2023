@@ -1,24 +1,12 @@
 # vue-test-2023
 
-## Project setup
+## Настройка проекта
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Запуск серва для разработки
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
