@@ -1,24 +1,16 @@
 # vue-test-2023
 
-## Project setup
+## Настройка проекта
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Запуск сервера
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### How to use
 ```
-npm run build
+В поле указать корректный json . Нажать кнопку - Сгенерировать форму. Появятся контейнеры с формами. По клику - Получить массив значений- получаем массив объектов {"code":value}. Для добавлени\ новых полей и контейнеров - обновить json, повторно нажать кнопку - Сгенерировать форму
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
