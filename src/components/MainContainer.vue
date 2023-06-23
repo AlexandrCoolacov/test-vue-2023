@@ -1,30 +1,35 @@
 <template>
-  <div
-    v-if="containerInfo.length"
-    class="container"
-  >
+  <section v-if="containerInfo.length">
     <div
-      v-for="(item, idx) of containerInfo[0]"
-      :key="idx"
+      class="container"
     >
-      <input v-if="item && item.type === 'input'" type="text">
-      <select  v-if="item && item.type === 'list'" name="" id="">
-        <option
-          v-for="(option,i) in item.listdata"
-          :key="i"
-        >
-          {{option.value}}
-        </option>
-      </select>
-      <input v-if="item && item.type === 'datepicker'" type="date">
-      {{ item.code }}
+      <div
+        v-for="(item, idx) of containerInfo[0]"
+        :key="idx"
+      >
+        <input v-if="item && item.type === 'input'" type="text">
+        <select  v-if="item && item.type === 'list'" name="" id="">
+          <option
+            v-for="(option,i) in item.listdata"
+            :key="i"
+          >
+            {{option.value}}
+          </option>
+        </select>
+        <input v-if="item && item.type === 'datepicker'" type="date">
+      </div>
+      <MainContainer
+        v-if="containerInfo.length"
+        :container-info="changedContainerInfo"
+      />
     </div>
-    <MainContainer
-      v-if="containerInfo.length"
-      :container-info="changedContainerInfo"
-    />
-  </div>
-
+    <button
+      @click="getCodeArray"
+      v-if="checkLength  && (containerInfo.length === checkLength.length)"
+    >
+      Получить массив значений
+    </button>
+  </section>
 </template>
 
 <script>
@@ -34,17 +39,21 @@ export default {
   props: {
     containerInfo: {
       required: false
-    }
+    },
+    checkLength: null
   },
   created () {
     this.changedContainerInfo = [...this.containerInfo]
     console.log(this.changedContainerInfo.shift())
-    console.log(this.changedContainerInfo)
-    // console.log(this.containerInfo)
   },
   data () {
     return {
       changedContainerInfo: []
+    }
+  },
+  methods: {
+    getCodeArray () {
+      this.$emit('getCodeArray')
     }
   },
   watch: {
