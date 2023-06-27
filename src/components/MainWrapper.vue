@@ -57,9 +57,7 @@ export default {
   methods: {
     getFlattenArray () {
       const tempArray = this.flatten(this.currentArray)
-      console.log(tempArray)
       tempArray.forEach((item) => {
-        console.log(item.code, item.value)
         this.codeArray.push({ [item.code]: item.value === undefined ? 'Значения нет' : item.value })
       })
     },
@@ -83,14 +81,10 @@ export default {
       this.currentArray.forEach((i) => {
         if (i.type === 'container') {
           nestingLevel.push(i)
-          console.log(nestingLevel)
         } else return false
-        console.log(i.type)
         // nestingLevel.push(i.parent)
-        console.log(i.parent)
       })
       allParents = nestingLevel
-      console.log(allParents)
       // eslint-disable-next-line array-callback-return
       const getAllParents = allParents.map((container) => {
         const parentContainer = []
@@ -100,11 +94,9 @@ export default {
             parentContainer.push(item)
           }
         })
-        console.log(parentContainer)
         this.endArray.push(parentContainer)
         return parentContainer
       })
-      console.log(getAllParents)
       this.pending = true
       this.getAllParents = getAllParents
     },
@@ -112,10 +104,8 @@ export default {
       try {
         JSON.parse(str)
         this.isJson = true
-        console.log('это джсон')
       } catch (e) {
         this.isJson = false
-        console.log('это не джсон')
       }
     }
   },
@@ -125,16 +115,13 @@ export default {
       deep: true,
       handler () {
         this.isJsonString(this.inputData)
-        // console.log('1111')
       }
     },
     isJson: {
       deep: true,
       handler () {
         if (this.isJson) {
-          console.log('работает компутед')
           this.currentArray = JSON.parse(this.inputData)
-          console.log(this.currentArray)
         }
       }
     }
