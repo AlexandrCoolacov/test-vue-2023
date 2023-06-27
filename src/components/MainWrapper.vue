@@ -47,7 +47,6 @@ export default {
       isJson: false,
       lengthArray: null,
       numberOfContainers: [],
-      endArray: [],
       pending: null,
       getAllParents: [],
       currentArray: [],
@@ -56,8 +55,10 @@ export default {
   },
   methods: {
     getFlattenArray () {
+      this.codeArray = []
       const tempArray = this.flatten(this.currentArray)
-      tempArray.forEach((item) => {
+      // eslint-disable-next-line array-callback-return
+      tempArray.map((item) => {
         this.codeArray.push({ [item.code]: item.value === undefined ? 'Значения нет' : item.value })
       })
     },
@@ -75,16 +76,12 @@ export default {
       this.containerKey += 1
       this.pending = false
       this.getAllParents = []
-      this.endArray = []
-      let allParents = []
-      const nestingLevel = []
+      const allParents = []
       this.currentArray.forEach((i) => {
         if (i.type === 'container') {
-          nestingLevel.push(i)
+          allParents.push(i)
         } else return false
-        // nestingLevel.push(i.parent)
       })
-      allParents = nestingLevel
       // eslint-disable-next-line array-callback-return
       const getAllParents = allParents.map((container) => {
         const parentContainer = []
@@ -94,7 +91,6 @@ export default {
             parentContainer.push(item)
           }
         })
-        this.endArray.push(parentContainer)
         return parentContainer
       })
       this.pending = true
@@ -111,15 +107,9 @@ export default {
   },
   watch: {
     inputData: {
-      immediate: false,
-      deep: true,
+      immediate: true,
       handler () {
         this.isJsonString(this.inputData)
-      }
-    },
-    isJson: {
-      deep: true,
-      handler () {
         if (this.isJson) {
           this.currentArray = JSON.parse(this.inputData)
         }
@@ -130,7 +120,6 @@ export default {
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .wrapper{
   display: flex;
